@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className="w-[100%] h-[70px]  flex justify-center shadow-lg shadow-slate-300/50 items-center bg-white/20 backdrop-blur-lg fixed top-0 z-50">
+      <div className="w-[100%] h-[70px]  flex justify-center shadow-lg shadow-slate-300/50 items-center bg-white/20 ">
         <div className="w-[90%] h-[50px]  flex justify-between items-center  z-1">
           <div className="text-xl">
             <Link to={"/"}>Blogger</Link>

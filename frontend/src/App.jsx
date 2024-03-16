@@ -21,6 +21,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="/" index={true} element={<Home />} />{" "}
+            {/* Home route set as index route */}
             <Route path="author" element={<Author />} />
             <Route path="postDetail/users/:id" element={<AuthorPosts />} />
             <Route
@@ -31,7 +33,6 @@ const App = () => {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="userProfile/:id/edit" element={<EditPost />} />
             <Route path="errorPage" element={<ErrorPage />} />
-            <Route path="home" element={<Home />} />
             <Route path="logIn" element={<LogIn />} />
             <Route path="logOut" element={<LogOut />} />
             <Route path="postDetail/:id" element={<PostDetail />} />
