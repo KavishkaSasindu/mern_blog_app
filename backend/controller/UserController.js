@@ -1,6 +1,19 @@
 const UserModel = require("../model/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // register user   post api/user/register  unprotected
 const register = async (request, response) => {
@@ -66,14 +79,14 @@ const logIn = async (request, response) => {
       const verifyUser = await bcrypt.compare(password, user.password);
       if (verifyUser) {
         const token = await jwt.sign(
-          { email: user.email },
+          { email: user.email, id: user._id },
           process.env.SECRET,
           { expiresIn: "24h" }
         );
 
         return response.status(200).json({
           message: "user loggedIn",
-          user: user,
+          user: user.email,
           jwt: token,
         });
       } else {
@@ -95,13 +108,39 @@ const logIn = async (request, response) => {
 
 // user profile  get api/user/:id  protected
 const userProfile = async (request, response) => {
-  return response.json({ message: " user profile" });
+  const { id } = request.params;
+  try {
+    const user = await UserModel.findById(id).select("-password"); //without password it return user object
+    if (user) {
+      return response.status(200).json({
+        message: "user found",
+        user: user,
+      });
+    } else {
+      return response.status(404).json({
+        message: "user not found",
+      });
+    }
+  } catch (error) {
+    return response.status(404).json({
+      error: error.message,
+    });
+  }
 };
 
 // change user avatar   put api/user/changeAvatar  protected
-const changeUserAvatar = async (request, response) => {
-  return response.json({ message: " change avatar" });
-};
+const changeUserAvatar =
+  (upload.single("image"),
+  async (request, response) => {
+    try {
+      console.log(request.file);
+    } catch (error) {
+      return response.status(400).json({
+        message: "error",
+        error: error.message,
+      });
+    }
+  });
 
 // edit profile  put api/user/edit protected
 const userProfileDetailsChange = async (request, response) => {

@@ -14,7 +14,7 @@ const {
 router.post("/api/user/register", register);
 router.post("/api/user/logIn", logIn);
 router.get("/api/user/:id", userProfile);
-router.put("/api/user/changeAvatar", changeUserAvatar);
+router.post("/api/user/changeAvatar", changeUserAvatar);
 router.put("/api/user/edit", userProfileDetailsChange);
 router.get("/api/user/getAvatar", getAvatar);
 
