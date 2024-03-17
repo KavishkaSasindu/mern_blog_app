@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="w-[100%] h-screen  mt-20  mb-20 flex justify-center items-center scrollbar-hide">
       <div className="w-[90%] h-screen  flex justify-center items-center">
-        <div className="w-full h-screen overflow-y-scroll scrollbar-hide md:h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-9">
+        <div className="w-full h-screen overflow-y-scroll scrollbar-hide md:h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {/* {getData.posts.map((user)=>{
       return (postItem eke div eka danna)
     })} */}

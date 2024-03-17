@@ -35,7 +35,8 @@ const App = () => {
             <Route path="errorPage" element={<ErrorPage />} />
             <Route path="logIn" element={<LogIn />} />
             <Route path="logOut" element={<LogOut />} />
-            <Route path="postDetail/:id" element={<PostDetail />} />
+            <Route path="postDetail/post" element={<PostDetail />} />{" "}
+            {/*must edit with id */}
             <Route path="register" element={<Register />} />
             <Route path="userProfile/:id" element={<UserProfile />} />
           </Route>
