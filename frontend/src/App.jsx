@@ -20,7 +20,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route element={<Layout />}>
             <Route path="/" index={true} element={<Home />} />{" "}
             {/* Home route set as index route */}
             <Route path="author" element={<Author />} />
