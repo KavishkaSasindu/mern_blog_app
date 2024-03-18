@@ -1,19 +1,6 @@
 const UserModel = require("../model/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
 
 // register user   post api/user/register  unprotected
 const register = async (request, response) => {
@@ -129,18 +116,21 @@ const userProfile = async (request, response) => {
 };
 
 // change user avatar   put api/user/changeAvatar  protected
-const changeUserAvatar =
-  (upload.single("image"),
-  async (request, response) => {
-    try {
+const changeUserAvatar = async (request, response) => {
+  try {
+    if (request.file) {
       console.log(request.file);
-    } catch (error) {
-      return response.status(400).json({
-        message: "error",
-        error: error.message,
+      return response.status(200).json({
+        message: "upload success",
       });
     }
-  });
+  } catch (error) {
+    return response.status(400).json({
+      message: "error",
+      error: error.message,
+    });
+  }
+};
 
 // edit profile  put api/user/edit protected
 const userProfileDetailsChange = async (request, response) => {
