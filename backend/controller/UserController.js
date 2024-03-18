@@ -117,12 +117,30 @@ const userProfile = async (request, response) => {
 
 // change user avatar   put api/user/changeAvatar  protected
 const changeUserAvatar = async (request, response) => {
+  const { id } = request.params;
   try {
-    if (request.file) {
+    if (!request.file) {
       console.log(request.file);
-      return response.status(200).json({
-        message: "upload success",
+      return response.status(400).json({
+        message: "upload a file!",
       });
+    }
+    const user = await UserModel.findById(id);
+    if (user) {
+      const uploadAvatar = await UserModel.findByIdAndUpdate(id, {
+        avatar: request.file.filename,
+      });
+      if (uploadAvatar) {
+        return response.status(201).json({
+          message: "avatar upload success to db",
+        });
+      } else {
+        return response.status(400).json({
+          message: "avatar no upload to db",
+        });
+      }
+    } else {
+      return response.status(404).json({});
     }
   } catch (error) {
     return response.status(400).json({
