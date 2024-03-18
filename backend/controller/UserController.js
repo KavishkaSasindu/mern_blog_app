@@ -152,7 +152,39 @@ const changeUserAvatar = async (request, response) => {
 
 // edit profile  put api/user/edit protected
 const userProfileDetailsChange = async (request, response) => {
-  return response.json({ message: " edit profile" });
+  const { name, email, password, posts } = request.body;
+  const { id } = request.params;
+  try {
+    const user = await UserModel.findById(id);
+    if (user) {
+      const updateUser = await UserModel.findByIdAndUpdate(
+        id,
+        {
+          name: name,
+        },
+        {
+          email: email,
+        },
+        {
+          password: password,
+        }
+      );
+
+      if (!updateUser) {
+        return response.status(400).json({
+          message: "user not updated",
+        });
+      }
+      return response.status(200).json({
+        message: "user updated",
+      });
+    }
+  } catch (error) {
+    return response.status(400).json({
+      message: "error",
+      error: error.message,
+    });
+  }
 };
 
 // get avatar  get api/user/getAvatar  unprotected

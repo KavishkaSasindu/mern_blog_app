@@ -21,7 +21,7 @@ router.put(
   upload.single("file"),
   changeUserAvatar
 );
-router.put("/api/user/edit", userProfileDetailsChange);
+router.put("/api/user/edit/:id", userProfileDetailsChange);
 router.get("/api/user/getAvatar", getAvatar);
 
 module.exports = router;
