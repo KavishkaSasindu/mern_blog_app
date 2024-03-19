@@ -188,8 +188,11 @@ const userProfileDetailsChange = async (request, response) => {
 };
 
 // get avatar  get api/user/getAvatar  unprotected
-const getAvatar = async (request, response) => {
-  return response.json({ message: " all avatar" });
+const getAllAvatar = async (request, response) => {
+  const users = await UserModel.find({}, "name avatar");
+  return response.status(200).json({
+    user: users,
+  });
 };
 
 module.exports = {
@@ -198,5 +201,5 @@ module.exports = {
   userProfile,
   changeUserAvatar,
   userProfileDetailsChange,
-  getAvatar,
+  getAllAvatar,
 };

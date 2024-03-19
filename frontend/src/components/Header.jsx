@@ -20,7 +20,7 @@ const Header = () => {
             </ul>
           </div>
           <div className="md:hidden">
-            <AiOutlineClose />
+            {/* <AiOutlineClose /> */}
             <RxHamburgerMenu />
           </div>
         </div>

@@ -9,6 +9,7 @@ const postRouter = require("./routes/PostRoutes");
 
 const app = express();
 
+app.use(express.static("uploads"));
 app.use(express.json());
 app.use(cors());
 app.use(

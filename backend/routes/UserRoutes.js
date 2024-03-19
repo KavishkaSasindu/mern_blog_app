@@ -8,7 +8,7 @@ const {
   userProfile,
   changeUserAvatar,
   userProfileDetailsChange,
-  getAvatar,
+  getAllAvatar,
 } = require("../controller/UserController");
 
 const upload = require("../middleware/UserMiddleware");
@@ -22,6 +22,6 @@ router.put(
   changeUserAvatar
 );
 router.put("/api/user/edit/:id", userProfileDetailsChange);
-router.get("/api/user/getAvatar", getAvatar);
+router.get("/api/user", getAllAvatar);
 
 module.exports = router;
